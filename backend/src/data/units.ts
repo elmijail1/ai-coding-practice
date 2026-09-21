@@ -1,6 +1,6 @@
-import type { Unit } from "../types/unit.js";
+import type { TUnit } from "../types/unit.js";
 
-export const units: Unit[] = [
+export const units: TUnit[] = [
   {
     id: 1,
     name: "Marine",

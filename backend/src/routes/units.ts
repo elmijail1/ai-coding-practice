@@ -1,21 +1,15 @@
 import { Router } from "express";
-import { units } from "../data/units.js";
-import { listUnitsQuerySchema } from "../schemas/units.js";
-import { findUnits } from "../services/units.js";
+import { listUnitsQuerySchema, unitIdParamsSchema } from "../schemas/units.js";
+import { findUnitById, findUnits } from "../services/units.js";
 
 export const unitsRouter = Router();
 
 unitsRouter.get("/", (req, res) => {
   const query = listUnitsQuerySchema.parse(req.query);
-  const units = findUnits(query);
-  res.json(units);
+  res.json(findUnits(query));
 });
 
 unitsRouter.get("/:id", (req, res) => {
-  const unit = units.find((u) => u.id === Number(req.params.id));
-  if (!unit) {
-    res.status(404).json({ error: "Unit not found" });
-    return;
-  }
-  res.json(unit);
+  const { id } = unitIdParamsSchema.parse(req.params);
+  res.json(findUnitById(id));
 });

@@ -1,4 +1,4 @@
-export type Unit = {
+export type TUnit = {
   id: number;
   name: string;
   race: "Terran" | "Protoss" | "Zerg";
