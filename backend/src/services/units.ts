@@ -11,6 +11,9 @@ export function findUnits({
   mineralsMax,
   vespeneMin,
   vespeneMax,
+  supplyMin,
+  supplyMax,
+  targets,
 }: ListUnitsQuery): TUnit[] {
   const filtered = units.filter((unit) => {
     if (race !== undefined && unit.race !== race) return false;
@@ -18,6 +21,9 @@ export function findUnits({
     if (mineralsMax !== undefined && unit.cost.minerals > mineralsMax) return false;
     if (vespeneMin !== undefined && unit.cost.vespene < vespeneMin) return false;
     if (vespeneMax !== undefined && unit.cost.vespene > vespeneMax) return false;
+    if (supplyMin !== undefined && unit.cost.supply < supplyMin) return false;
+    if (supplyMax !== undefined && unit.cost.supply > supplyMax) return false;
+    if (targets !== undefined && unit.targets !== targets) return false;
     return true;
   });
 

@@ -9,6 +9,9 @@ export const listUnitsQuerySchema = z.object({
   mineralsMax: nonEmptyNumberValue(0),
   vespeneMin: nonEmptyNumberValue(0),
   vespeneMax: nonEmptyNumberValue(0),
+  supplyMin: nonEmptyNumberValue(0),
+  supplyMax: nonEmptyNumberValue(0),
+  targets: z.enum(["ground", "air", "ground and air", "none"]).optional(),
 });
 
 export const unitIdParamsSchema = z.object({
