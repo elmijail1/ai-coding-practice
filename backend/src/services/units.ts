@@ -15,6 +15,7 @@ export function findUnits({
   supplyMax,
   targets,
   type,
+  typesMatchAll,
 }: ListUnitsQuery): TUnit[] {
   const filtered = units.filter((unit) => {
     if (race !== undefined && !race.includes(unit.race)) return false;
@@ -25,7 +26,12 @@ export function findUnits({
     if (supplyMin !== undefined && unit.cost.supply < supplyMin) return false;
     if (supplyMax !== undefined && unit.cost.supply > supplyMax) return false;
     if (targets !== undefined && unit.targets !== targets) return false;
-    if (type !== undefined && !type.some((attribute) => unit.type.includes(attribute))) return false;
+    if (type !== undefined) {
+      const matches = typesMatchAll
+        ? type.every((attribute) => unit.type.includes(attribute))
+        : type.some((attribute) => unit.type.includes(attribute));
+      if (!matches) return false;
+    }
     return true;
   });
 
