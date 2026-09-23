@@ -3,9 +3,26 @@ import { HttpError } from "../errors/http-error.js";
 import type { ListUnitsQuery } from "../schemas/units.js";
 import type { TUnit } from "../types/unit.js";
 
-export function findUnits({ limit, page }: ListUnitsQuery): TUnit[] {
+export function findUnits({
+  limit,
+  page,
+  race,
+  mineralsMin,
+  mineralsMax,
+  vespeneMin,
+  vespeneMax,
+}: ListUnitsQuery): TUnit[] {
+  const filtered = units.filter((unit) => {
+    if (race !== undefined && unit.race !== race) return false;
+    if (mineralsMin !== undefined && unit.cost.minerals < mineralsMin) return false;
+    if (mineralsMax !== undefined && unit.cost.minerals > mineralsMax) return false;
+    if (vespeneMin !== undefined && unit.cost.vespene < vespeneMin) return false;
+    if (vespeneMax !== undefined && unit.cost.vespene > vespeneMax) return false;
+    return true;
+  });
+
   const offset = (page - 1) * limit;
-  return units.slice(offset, offset + limit);
+  return filtered.slice(offset, offset + limit);
 }
 
 export function findUnitById(id: number): TUnit {
