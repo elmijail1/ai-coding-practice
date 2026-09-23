@@ -3,8 +3,9 @@ import { HttpError } from "../errors/http-error.js";
 import type { ListUnitsQuery } from "../schemas/units.js";
 import type { TUnit } from "../types/unit.js";
 
-export function findUnits({ limit }: ListUnitsQuery): TUnit[] {
-  return units.slice(0, limit);
+export function findUnits({ limit, page }: ListUnitsQuery): TUnit[] {
+  const offset = (page - 1) * limit;
+  return units.slice(offset, offset + limit);
 }
 
 export function findUnitById(id: number): TUnit {
