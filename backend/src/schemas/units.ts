@@ -15,7 +15,12 @@ export const listUnitsQuerySchema = z.object({
   supplyMax: nonEmptyNumberValue(0),
   targets: z.enum(["ground", "air", "ground and air", "none"]).optional(),
   type: multiValueEnum(EUnitAttributes),
-  typesMatchAll: z.preprocess((val) => (val === "" ? "true" : val), z.stringbool().default(false)),
+  typesMatchAll: z.preprocess(
+    (val) => (val === "" ? "true" : val),
+    z.stringbool().default(false),
+  ),
+  sortBy: z.enum(["id"]).default("id"),
+  orderBy: z.enum(["ascending", "descending"]).default("ascending"),
 });
 
 export const unitIdParamsSchema = z.object({

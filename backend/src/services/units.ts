@@ -16,13 +16,19 @@ export function findUnits({
   targets,
   type,
   typesMatchAll,
+  sortBy,
+  orderBy,
 }: ListUnitsQuery): TUnit[] {
   const filtered = units.filter((unit) => {
     if (race !== undefined && !race.includes(unit.race)) return false;
-    if (mineralsMin !== undefined && unit.cost.minerals < mineralsMin) return false;
-    if (mineralsMax !== undefined && unit.cost.minerals > mineralsMax) return false;
-    if (vespeneMin !== undefined && unit.cost.vespene < vespeneMin) return false;
-    if (vespeneMax !== undefined && unit.cost.vespene > vespeneMax) return false;
+    if (mineralsMin !== undefined && unit.cost.minerals < mineralsMin)
+      return false;
+    if (mineralsMax !== undefined && unit.cost.minerals > mineralsMax)
+      return false;
+    if (vespeneMin !== undefined && unit.cost.vespene < vespeneMin)
+      return false;
+    if (vespeneMax !== undefined && unit.cost.vespene > vespeneMax)
+      return false;
     if (supplyMin !== undefined && unit.cost.supply < supplyMin) return false;
     if (supplyMax !== undefined && unit.cost.supply > supplyMax) return false;
     if (targets !== undefined && unit.targets !== targets) return false;
@@ -35,8 +41,13 @@ export function findUnits({
     return true;
   });
 
+  const order = orderBy === "ascending" ? 1 : -1;
+  const sorted = filtered
+    .slice()
+    .sort((a, b) => (a[sortBy] - b[sortBy]) * order);
+
   const offset = (page - 1) * limit;
-  return filtered.slice(offset, offset + limit);
+  return sorted.slice(offset, offset + limit);
 }
 
 export function findUnitById(id: number): TUnit {

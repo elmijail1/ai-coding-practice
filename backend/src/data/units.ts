@@ -2,7 +2,7 @@ import type { TUnit } from "../types/unit.js";
 
 export const units: TUnit[] = [
   {
-    id: 11,
+    id: 101,
     name: "Zealot",
     race: "Protoss",
     basicHp: 100,
@@ -13,7 +13,7 @@ export const units: TUnit[] = [
     type: ["biological", "ground"],
   },
   {
-    id: 12,
+    id: 102,
     name: "Stalker",
     race: "Protoss",
     basicHp: 80,
@@ -24,7 +24,18 @@ export const units: TUnit[] = [
     type: ["ground", "mechanical"],
   },
   {
-    id: 13,
+    id: 103,
+    name: "Sentry",
+    race: "Protoss",
+    basicHp: 40,
+    basicDamage: 6,
+    cost: { minerals: 50, vespene: 100, supply: 2 },
+    productionHotkey: "E",
+    targets: "ground and air",
+    type: ["ground", "mechanical", "psionic"],
+  },
+  {
+    id: 104,
     name: "Phoenix",
     race: "Protoss",
     basicHp: 120,
@@ -35,7 +46,7 @@ export const units: TUnit[] = [
     type: ["air", "mechanical"],
   },
   {
-    id: 21,
+    id: 201,
     name: "Marine",
     race: "Terran",
     basicHp: 45,
@@ -46,7 +57,7 @@ export const units: TUnit[] = [
     type: ["biological", "ground"],
   },
   {
-    id: 22,
+    id: 202,
     name: "Marauder",
     race: "Terran",
     basicHp: 125,
@@ -57,7 +68,7 @@ export const units: TUnit[] = [
     type: ["biological", "ground"],
   },
   {
-    id: 23,
+    id: 203,
     name: "Reaper",
     race: "Terran",
     basicHp: 60,
@@ -68,7 +79,18 @@ export const units: TUnit[] = [
     type: ["biological", "ground"],
   },
   {
-    id: 31,
+    id: 204,
+    name: "Hellion",
+    race: "Terran",
+    basicHp: 90,
+    basicDamage: 8,
+    cost: { minerals: 100, vespene: 0, supply: 2 },
+    productionHotkey: "E",
+    targets: "ground",
+    type: ["ground", "mechanical"],
+  },
+  {
+    id: 301,
     name: "Zergling",
     race: "Zerg",
     basicHp: 35,
@@ -79,7 +101,7 @@ export const units: TUnit[] = [
     type: ["biological", "ground"],
   },
   {
-    id: 32,
+    id: 302,
     name: "Overlord",
     race: "Zerg",
     basicHp: 200,
@@ -90,7 +112,18 @@ export const units: TUnit[] = [
     type: ["air", "biological"],
   },
   {
-    id: 33,
+    id: 303,
+    name: "Roach",
+    race: "Zerg",
+    basicHp: 145,
+    basicDamage: 16,
+    cost: { minerals: 75, vespene: 25, supply: 2 },
+    productionHotkey: "R",
+    targets: "ground",
+    type: ["biological", "ground"],
+  },
+  {
+    id: 304,
     name: "Hydralisk",
     race: "Zerg",
     basicHp: 90,

@@ -1,2 +1,3 @@
 - create Docker early and update it as we go
 - find a handy DB to store stuff (Mongo perhaps?), preferably one that can be stored for free somewhere
+- make the API accessible for outer requests
