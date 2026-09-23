@@ -1,6 +1,6 @@
 import type { TRace } from "./general.js";
 
-const ATTRIBUTES = [
+export const EUnitAttributes = [
   "air",
   "armored",
   "biological",
@@ -16,7 +16,7 @@ const ATTRIBUTES = [
   "structure",
   "summoned",
 ] as const;
-type TUnitAttribute = (typeof ATTRIBUTES)[number];
+type TUnitAttribute = (typeof EUnitAttributes)[number];
 
 export type TUnit = {
   id: number;

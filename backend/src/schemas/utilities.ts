@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export function multiValueEnum<T extends readonly [string, ...string[]]>(values: T) {
+  return z
+    .union([z.enum(values), z.array(z.enum(values))])
+    .optional()
+    .transform((val) => (val === undefined || Array.isArray(val) ? val : [val]));
+}
+
 export function nonEmptyNumberValue(min: number) {
   return z
     .string()
