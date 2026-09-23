@@ -1,10 +1,14 @@
 import { z } from "zod";
+import { ERaces } from "../types/general.js";
 import { nonEmptyNumberValue } from "./utilities.js";
 
 export const listUnitsQuerySchema = z.object({
   limit: z.coerce.number().int().min(1).max(200).default(5),
   page: z.coerce.number().int().min(1).default(1),
-  race: z.enum(["Terran", "Protoss", "Zerg"]).optional(),
+  race: z
+    .union([z.enum(ERaces), z.array(z.enum(ERaces))])
+    .optional()
+    .transform((val) => (val === undefined || Array.isArray(val) ? val : [val])),
   mineralsMin: nonEmptyNumberValue(0),
   mineralsMax: nonEmptyNumberValue(0),
   vespeneMin: nonEmptyNumberValue(0),

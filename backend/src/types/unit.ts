@@ -1,3 +1,5 @@
+import type { TRace } from "./general.js";
+
 const ATTRIBUTES = [
   "air",
   "armored",
@@ -19,7 +21,7 @@ type TUnitAttribute = (typeof ATTRIBUTES)[number];
 export type TUnit = {
   id: number;
   name: string;
-  race: "Terran" | "Protoss" | "Zerg";
+  race: TRace;
   basicHp: number;
   basicDamage: number;
   cost: { minerals: number; vespene: number; supply: number };

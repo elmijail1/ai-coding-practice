@@ -16,7 +16,7 @@ export function findUnits({
   targets,
 }: ListUnitsQuery): TUnit[] {
   const filtered = units.filter((unit) => {
-    if (race !== undefined && unit.race !== race) return false;
+    if (race !== undefined && !race.includes(unit.race)) return false;
     if (mineralsMin !== undefined && unit.cost.minerals < mineralsMin) return false;
     if (mineralsMax !== undefined && unit.cost.minerals > mineralsMax) return false;
     if (vespeneMin !== undefined && unit.cost.vespene < vespeneMin) return false;
