@@ -41,10 +41,15 @@ export function findUnits({
     return true;
   });
 
+  const sortValueGetters: Record<typeof sortBy, (unit: TUnit) => number> = {
+    id: (unit) => unit.id,
+    minerals: (unit) => unit.cost.minerals,
+    vespene: (unit) => unit.cost.vespene,
+  };
+  const getSortValue = sortValueGetters[sortBy];
+
   const order = orderBy === "ascending" ? 1 : -1;
-  const sorted = filtered
-    .slice()
-    .sort((a, b) => (a[sortBy] - b[sortBy]) * order);
+  const sorted = filtered.sort((a, b) => (getSortValue(a) - getSortValue(b)) * order);
 
   const offset = (page - 1) * limit;
   return sorted.slice(offset, offset + limit);

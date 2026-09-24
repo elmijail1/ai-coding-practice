@@ -19,7 +19,7 @@ export const listUnitsQuerySchema = z.object({
     (val) => (val === "" ? "true" : val),
     z.stringbool().default(false),
   ),
-  sortBy: z.enum(["id"]).default("id"),
+  sortBy: z.enum(["id", "minerals", "vespene"]).default("id"),
   orderBy: z.enum(["ascending", "descending"]).default("ascending"),
 });
 
