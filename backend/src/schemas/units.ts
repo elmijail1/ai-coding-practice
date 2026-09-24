@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ERaces } from "../types/general.js";
+import { ERaces, ESortBy } from "../types/general.js";
 import { EUnitAttributes } from "../types/unit.js";
 import { multiValueEnum, nonEmptyNumberValue } from "./utilities.js";
 
@@ -19,7 +19,7 @@ export const listUnitsQuerySchema = z.object({
     (val) => (val === "" ? "true" : val),
     z.stringbool().default(false),
   ),
-  sortBy: z.enum(["id", "minerals", "vespene"]).default("id"),
+  sortBy: z.enum(ESortBy).optional(),
   orderBy: z.enum(["ascending", "descending"]).default("ascending"),
   search: z
     .preprocess(

@@ -1,6 +1,7 @@
 import { units } from "../data/units.js";
 import { HttpError } from "../errors/http-error.js";
 import type { ListUnitsQuery } from "../schemas/units.js";
+import type { TSortBy } from "../types/general.js";
 import type { TUnit } from "../types/unit.js";
 
 export function findUnits({
@@ -47,17 +48,36 @@ export function findUnits({
     return true;
   });
 
-  const sortValueGetters: Record<typeof sortBy, (unit: TUnit) => number> = {
+  const sortValueGetters: Record<TSortBy, (unit: TUnit) => number> = {
     id: (unit) => unit.id,
     minerals: (unit) => unit.cost.minerals,
     vespene: (unit) => unit.cost.vespene,
   };
-  const getSortValue = sortValueGetters[sortBy];
+  const getSortValue = sortValueGetters[sortBy ?? "id"];
 
   const order = orderBy === "ascending" ? 1 : -1;
-  const sorted = filtered.sort(
-    (a, b) => (getSortValue(a) - getSortValue(b)) * order,
-  );
+  const searchLower = search?.toLowerCase();
+  const getStartsWithSearchRank = (unit: TUnit) =>
+    searchLower !== undefined && unit.name.toLowerCase().startsWith(searchLower)
+      ? 0
+      : 1;
+
+  const sorted = filtered.sort((a, b) => {
+    if (search === undefined) {
+      return (getSortValue(a) - getSortValue(b)) * order;
+    }
+    if (sortBy === undefined) {
+      const searchRankDiff =
+        getStartsWithSearchRank(a) - getStartsWithSearchRank(b);
+      return searchRankDiff !== 0
+        ? searchRankDiff
+        : (getSortValue(a) - getSortValue(b)) * order;
+    }
+    const sortValueDiff = (getSortValue(a) - getSortValue(b)) * order;
+    return sortValueDiff !== 0
+      ? sortValueDiff
+      : getStartsWithSearchRank(a) - getStartsWithSearchRank(b);
+  });
 
   const offset = (page - 1) * limit;
   return sorted.slice(offset, offset + limit);

@@ -1,6 +1,7 @@
 import type { TUnit } from "../types/unit.js";
 
 export const units: TUnit[] = [
+  // protoss start here
   {
     id: 101,
     name: "Zealot",
@@ -36,6 +37,17 @@ export const units: TUnit[] = [
   },
   {
     id: 104,
+    name: "High Templar",
+    race: "Protoss",
+    basicHp: 40,
+    basicDamage: 4,
+    cost: { minerals: 50, vespene: 150, supply: 2 },
+    productionHotkey: "T",
+    targets: "ground",
+    type: ["biological", "ground", "psionic"],
+  },
+  {
+    id: 105,
     name: "Phoenix",
     race: "Protoss",
     basicHp: 120,
@@ -45,6 +57,7 @@ export const units: TUnit[] = [
     targets: "air",
     type: ["air", "mechanical"],
   },
+  // terrans start here
   {
     id: 201,
     name: "Marine",
@@ -90,6 +103,18 @@ export const units: TUnit[] = [
     type: ["ground", "mechanical"],
   },
   {
+    id: 205,
+    name: "Hellbat",
+    race: "Terran",
+    basicHp: 135,
+    basicDamage: 18,
+    cost: { minerals: 100, vespene: 0, supply: 2 },
+    productionHotkey: "E",
+    targets: "ground",
+    type: ["ground", "biological", "mechanical"],
+  },
+  // zergs start here
+  {
     id: 301,
     name: "Zergling",
     race: "Zerg",
@@ -124,6 +149,17 @@ export const units: TUnit[] = [
   },
   {
     id: 304,
+    name: "Baneling",
+    race: "Zerg",
+    basicHp: 30,
+    basicDamage: 16,
+    cost: { minerals: 25, vespene: 25, supply: 0.5 },
+    productionHotkey: "E",
+    targets: "ground",
+    type: ["biological", "ground"],
+  },
+  {
+    id: 305,
     name: "Hydralisk",
     race: "Zerg",
     basicHp: 90,
