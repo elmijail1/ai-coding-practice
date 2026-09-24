@@ -18,6 +18,7 @@ export function findUnits({
   typesMatchAll,
   sortBy,
   orderBy,
+  search,
 }: ListUnitsQuery): TUnit[] {
   const filtered = units.filter((unit) => {
     if (race !== undefined && !race.includes(unit.race)) return false;
@@ -38,6 +39,11 @@ export function findUnits({
         : type.some((attribute) => unit.type.includes(attribute));
       if (!matches) return false;
     }
+    if (
+      search !== undefined &&
+      !unit.name.toLowerCase().includes(search.toLowerCase())
+    )
+      return false;
     return true;
   });
 
@@ -49,7 +55,9 @@ export function findUnits({
   const getSortValue = sortValueGetters[sortBy];
 
   const order = orderBy === "ascending" ? 1 : -1;
-  const sorted = filtered.sort((a, b) => (getSortValue(a) - getSortValue(b)) * order);
+  const sorted = filtered.sort(
+    (a, b) => (getSortValue(a) - getSortValue(b)) * order,
+  );
 
   const offset = (page - 1) * limit;
   return sorted.slice(offset, offset + limit);

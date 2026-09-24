@@ -21,6 +21,12 @@ export const listUnitsQuerySchema = z.object({
   ),
   sortBy: z.enum(["id", "minerals", "vespene"]).default("id"),
   orderBy: z.enum(["ascending", "descending"]).default("ascending"),
+  search: z
+    .preprocess(
+      (v) => (typeof v === "string" ? v.trim() : v),
+      z.string().max(20).optional(),
+    )
+    .transform((v) => (v === undefined || v.length === 0 ? undefined : v)),
 });
 
 export const unitIdParamsSchema = z.object({

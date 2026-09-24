@@ -1,7 +1,8 @@
 /units
 - GET
--- sorting (ID (def), name, mineral cost, vespene cost)
 -- name search
+--- first we list items that start with the substring, then the rest
+
 - POST /units: add a unit through a REST interface, only allowed for authenticated users with admin role, so this will require first creating the user module
 - PATCH /units/:id: update some value
 - DELETE /units/:id: only allowed for admins and only for units that allow deletion (all that are created separately with POST)
